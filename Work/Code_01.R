@@ -3,7 +3,7 @@
 ##name:
 ##
 ##Id:
-text_bible <- scan("1581-0.txt",what="character",skip=156)
+text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
 n <- length(text_bible)
 text_bible <- text_bible[-((n-2909):n)]; ## strip license
 
@@ -14,7 +14,7 @@ splitPunct <- function(text_0){
   text_punctmark <- gsub('([[:punct:]])', ' \\1 ', text_0)
   
   #split the text by " "
-  text_split <- unlist(strsplit(text_punctmark," "))  
+  text_split <- unlist(strsplit(text_punctmark, " "))  
   
   return(text_split)
 }
@@ -22,3 +22,36 @@ splitPunct <- function(text_0){
 text_bible <- splitPunct(text_bible)
 
 library(mgcv)
+#Change the uppercase letter to lowercase
+text_bible <- tolower(text_bible)
+
+#find the unique words
+text_unique <- unique(text_bible)
+word_index <- attr(uniquecombs(text_bible), which = "index")
+
+#count each word
+words_quantity <- tabulate(word_index)
+
+#Find the top 1000 words
+rank_1001 <- sort(words_quantity, decreasing = TRUE)[1001]
+word_1k <- text_unique[which(words_quantity > rank_1001)]
+
+word_match <- match(text_bible, word_1k)
+
+word_matrix <- cbind(word_match[-length(word_match)], word_match[-1])
+#get the common words pair
+word_matrix <- word_matrix[-which(is.na(rowSums(word_matrix))),]
+
+word_length <- length(word_1k)
+A <- matrix(0, nrow = word_length, ncol = word_length)
+
+nrow(word_matrix)
+for (i in 1:nrow(word_matrix)) {
+  a <- word_matrix[i,1]
+  b <- word_matrix[i,2]
+  A[a, b] = A[a, b] + 1
+}
+
+A <- A / rowSums(A)
+
+
