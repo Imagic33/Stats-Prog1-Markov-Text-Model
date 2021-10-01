@@ -1,21 +1,24 @@
-##Group
+##Group:
 ##
 ##name:
 ##
 ##Id:
-a <- scan("1581-0.txt",what="character",skip=156)
-n <- length(a)
-a <- a[-((n-2909):n)] ## strip license
-
-
+text_bible <- scan("1581-0.txt",what="character",skip=156)
+n <- length(text_bible)
+text_bible <- text_bible[-((n-2909):n)]; ## strip license
 
 ##split the punction from words
-split_punct <- function(text_0){
-  len <- length(text_0)
+splitPunct <- function(text_0){
   
+  #mark the punction by " "
+  text_punctmark <- gsub('([[:punct:]])', ' \\1 ', text_0)
   
-  for (i in 1:len) {
-    
-  }
+  #split the text by " "
+  text_split <- unlist(strsplit(text_punctmark," "))  
   
+  return(text_split)
 }
+
+text_bible <- splitPunct(text_bible)
+
+library(mgcv)
