@@ -10,7 +10,7 @@ text_bible <- text_bible[-((n-2909):n)]; ## strip license
 ##split the punction from words
 splitPunct <- function(text_0){
   
-  #mark the punction by " "
+  #Give the position for the punctuation, mark the punction by " "
   text_punctmark <- gsub('([[:punct:]])', ' \\1 ', text_0)
   
   #split the text by " "
@@ -29,10 +29,10 @@ text_bible <- tolower(text_bible)
 text_unique <- unique(text_bible)
 word_index <- attr(uniquecombs(text_bible), which = "index")
 
-#count each word
+#Find the frequencies of each words
 words_quantity <- tabulate(word_index)
 
-#Find the top 1000 words
+#Find the most frequent 1000 words
 rank_1001 <- sort(words_quantity, decreasing = TRUE)[1001]
 word_1k <- text_unique[which(words_quantity > rank_1001)]
 
@@ -53,5 +53,13 @@ for (i in 1:nrow(word_matrix)) {
 }
 
 A <- A / rowSums(A)
+Ran_sentence <- array("",c(1,100))
+Ran_sentence[1] <- sample(b,1)
+for (i in 1:100) {
+  
+  Ran_sentence[i+1] <- sample(b,1,T,A[which(b==Ran_sentence[i]),])
+  
+}
+cat(Ran_sentence)
 
 
