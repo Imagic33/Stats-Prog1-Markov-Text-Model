@@ -21,7 +21,6 @@ splitPunct <- function(text_0){
 
 text_bible <- splitPunct(text_bible)
 
-library(mgcv)
 #Change the uppercase letter to lowercase
 text_bible <- tolower(text_bible)
 
@@ -39,7 +38,7 @@ word_1k <- text_unique[which(words_quantity > rank_1001)]
   
 word_index_1k <- match(text_bible, word_1k)
 
-word_matrix <- cbind(word_index_1k[-length(word_match)], word_index_1k[-1])
+word_matrix <- cbind(word_index_1k[-length(word_index_1k)], word_index_1k[-1])
 #get the common words pair
 word_matrix <- word_matrix[-which(is.na(rowSums(word_matrix))),]
 
