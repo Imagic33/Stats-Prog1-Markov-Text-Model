@@ -44,12 +44,13 @@ word_matrix <- word_matrix[-which(is.na(rowSums(word_matrix))),]
 
 word_length <- length(word_1k)
 A <- matrix(0, nrow = word_length, ncol = word_length)
-
+#create matrix A with all zeros.
 nrow(word_matrix)
 for (i in 1:nrow(word_matrix)) {
-  a <- word_matrix[i,1]
-  b <- word_matrix[i,2]
-  A[a, b] = A[a, b] + 1
+  a <- word_matrix[i,1] #find position of the first word from words pair
+  b <- word_matrix[i,2] #find position of the second word from words pair
+  A[a, b] = A[a, b] + 1 #locate words pair in A by their particular position and plus one once such word pair appears.
+  
 }
 
 A <- A / rowSums(A)
