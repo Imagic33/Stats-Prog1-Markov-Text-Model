@@ -7,7 +7,7 @@
 ##Id: s2190991
 ## s2191157
 ## s1812011 
-
+setwd("put/your/local/repo/location/here")
 text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
 #The code is changed a little bit here in case that strange unrecognizable characters appear.
 n <- length(text_bible)
