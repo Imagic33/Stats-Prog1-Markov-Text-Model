@@ -1,9 +1,11 @@
 ##Group:39
 ##
-##name: Xiaoyi Zhou
+##name: Xiaoyi Zhou 
+## Enlin Shen
 ##
 ##
 ##Id: s2190991
+## s2191157
 
 text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
 #The code is changed a little bit here in order to in case that strange unrecognizable characters appear.
