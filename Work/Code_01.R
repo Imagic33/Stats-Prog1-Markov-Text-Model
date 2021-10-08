@@ -1,8 +1,8 @@
-##Group:
+##Group:39
 ##
-##name:
+##name:Xiaoyi Zhou; 
+##ID:s2190991; 
 ##
-##Id:
 text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
 n <- length(text_bible)
 text_bible <- text_bible[-((n-2909):n)]; ## strip license
@@ -55,10 +55,10 @@ for (i in 1:nrow(word_matrix)) {
 
 A <- A / rowSums(A)
 Ran_sentence <- array("",c(1,100))
-Ran_sentence[1] <- sample(b,1)
+Ran_sentence[1] <- sample(word_1k,1)
 for (i in 1:100) {
   
-  Ran_sentence[i+1] <- sample(b,1,T,A[which(b==Ran_sentence[i]),])
+  Ran_sentence[i+1] <- sample(word_1k,1,T,A[which(word_1k==Ran_sentence[i]),])
   
 }
 cat(Ran_sentence)
