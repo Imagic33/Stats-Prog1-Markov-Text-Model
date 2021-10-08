@@ -8,7 +8,7 @@
 ## s2191157
 
 text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
-#The code is changed a little bit here in order to in case that strange unrecognizable characters appear.
+#The code is changed a little bit here in case that strange unrecognizable characters appear.
 n <- length(text_bible)
 text_bible <- text_bible[-((n-2909):n)]; ## strip license
 
