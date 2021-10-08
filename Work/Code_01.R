@@ -49,7 +49,7 @@ nrow(word_matrix)
 for (i in 1:nrow(word_matrix)) {
   a <- word_matrix[i,1] #find position of the first word from words pair
   b <- word_matrix[i,2] #find position of the second word from words pair
-  A[a, b] = A[a, b] + 1 #locate words pair in A by their particular position and plus one once such word pair appears.
+  A[a, b] = A[a, b] + 1 #locate words pair in A by their particular position and plus one once such word pair appears
   
 }
 
