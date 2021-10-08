@@ -27,7 +27,8 @@ text_bible <- tolower(text_bible)
 
 #find the unique words
 text_unique <- unique(text_bible)
-word_index <- attr(uniquecombs(text_bible), which = "index")
+
+word_index <- match(text_bible, text_unique)
 
 #count each word
 words_quantity <- tabulate(word_index)
@@ -35,10 +36,10 @@ words_quantity <- tabulate(word_index)
 #Find the top 1000 words
 rank_1001 <- sort(words_quantity, decreasing = TRUE)[1001]
 word_1k <- text_unique[which(words_quantity > rank_1001)]
+  
+word_index_1k <- match(text_bible, word_1k)
 
-word_match <- match(text_bible, word_1k)
-
-word_matrix <- cbind(word_match[-length(word_match)], word_match[-1])
+word_matrix <- cbind(word_index_1k[-length(word_match)], word_index_1k[-1])
 #get the common words pair
 word_matrix <- word_matrix[-which(is.na(rowSums(word_matrix))),]
 
