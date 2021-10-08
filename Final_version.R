@@ -2,10 +2,11 @@
 ##
 ##name: Xiaoyi Zhou 
 ## Enlin Shen
-##
+## Lucie Pryke
 ##
 ##Id: s2190991
 ## s2191157
+## s1812011
 
 text_bible <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
 #The code is changed a little bit here in case that strange unrecognizable characters appear.
@@ -100,15 +101,6 @@ for (i in 1:150) {
 
 ##Show the words.
 cat (Ran_sentence)
-
-
-
-
-
-
-
-
-
 
 
 
