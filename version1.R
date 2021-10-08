@@ -48,9 +48,6 @@ b_position <- match(bible_ws_low,b)
 b_position
 b
 
-library(mgcv)
-
-##There is a character that influence tolower.
 bible_ws_low <- tolower(bible_ws)
 # Transform the words in bible into lower case.
 bible_voc <- unique(bible_ws_low)
