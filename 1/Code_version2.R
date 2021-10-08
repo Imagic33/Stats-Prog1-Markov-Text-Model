@@ -1,0 +1,78 @@
+## Group
+##
+## name:
+##
+## Id:
+setwd("C:/Users/Éò¶÷ÁÙ/Stats-Prog1-Markov-Text-Model/Work")
+a <- scan("1581-0.txt", what="character", skip=156, encoding = "UTF-8")
+n <- length(a)
+a <- a[-((n-2909):n)] ## strip license
+# a is the bible words
+
+
+
+
+split_punct <- function(text_0){
+  
+  
+  #mark the punction by " "
+  text_punctmark <- gsub('([[:punct:]])', ' \\1 ', text_0)
+  
+  #split the text by " "
+  text_split <- unlist(strsplit(text_punctmark, " "))  
+  
+  return(text_split)
+  
+}
+bible_ws <- split_punct(a)
+
+library(mgcv)
+##There is a character that influence tolower.
+bible_ws_low <- tolower(bible_ws)
+# Transform the words in bible into lower case.
+bible_voc <- unique(bible_ws_low)
+# Find all the vocabulary in bible.
+word_pos <- match(bible_ws_low,bible_voc)
+# Find the positions for each words.
+freq <- tabulate(word_pos)
+## Find the frequencies of each words.
+main_voc_pos <- order(freq,decreasing=TRUE)[1:1000]
+## Find the most frequent 1000 words.
+main_voc <- bible_voc[main_voc_pos]
+
+b <- main_voc
+
+b_position <- match(bible_ws_low,b)
+# Find the positions for each words for vector b.
+
+bible_ws_low[b_position]
+follow_pri <- b_position[-1]
+follow <- append(follow_pri, b_position[1])
+
+pair_pos <- cbind(b_position, follow)
+cbind(b_position, follow)
+
+##delete_pair_pos  
+
+pair_pos <- pair_pos[-which(is.na(rowSums(pair_pos))),]
+pair_pos
+A <- matrix(0,1000,1000) 
+
+for (i in 1:nrow(pair_pos )) {
+  
+  fir_pos <- pair_pos [i,1]
+  sec_pos <- pair_pos [i,2] 
+  A[fir_pos,sec_pos] <- A[fir_pos,sec_pos] + 1
+  
+  
+}
+
+A <- A/rowSums(A)
+Ran_sentence <- array("",c(1,100))
+Ran_sentence[1] <- sample(b,1)
+for (i in 1:100) {
+  
+  Ran_sentence[i+1] <- sample(b,1,T,A[which(b==Ran_sentence[i]),])
+  
+}
+cat(Ran_sentence)
